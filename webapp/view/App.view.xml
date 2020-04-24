@@ -1,0 +1,81 @@
+<mvc:View controllerName="Application.Report.controller.App" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns:f="sap.ui.layout.form" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<Panel id="selection" expandable="true" headerText="Selection Criteria" expanded="true" width="auto" class="sapUiResponsiveMargin">
+							<f:SimpleForm id="selectionform" editable="true" width="100%">
+								<f:content>
+									<core:Title/>
+									<Label text="DDO" design="Bold" required="true"/>
+									<Input id="ddo" showValueHelp="true" editable="true" valueHelpOnly="false" valueHelpRequest="Valuehelpddo"/>
+									<Label text="Payroll Area" required="true"/>
+									<Input id="payarea" showValueHelp="true" placeholder="Select Payroll Area" editable="true" valueHelpOnly="false"
+										valueHelpRequest="Valuehelppayarea"/>
+									<Label/>
+									<RadioButtonGroup columns="2" selectedIndex="2" class="sapUiMediumMarginBottom">
+										<buttons>
+											<RadioButton id="regular" text="Regular" selected="true"/>
+											<RadioButton id="offcycle" text="Off "/>
+										</buttons>
+									</RadioButtonGroup>
+									<Label/>
+									<core:Title/>
+									<Label design="Bold" text="From Period" required="true"/>
+									<DatePicker id="frmdate" displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd" change="onchangeFrmDate"/>
+									<Label design="Bold" text="To Period" required="true"/>
+									<DatePicker id="todate" displayFormat="dd.MM.yyyy" change="onchangeToDate"/>
+									<Label/>
+									<Button icon="sap-icon://sys-find" text="Search" type="Emphasized" press="onpressSearch"/>
+								</f:content>
+							</f:SimpleForm>
+						</Panel>
+						<Panel id="tabpanel" expandable="true" headerText="Results" expanded="false" width="auto" class="sapUiResponsiveMargin">
+							<Toolbar>
+								<Title id="headertabTitle" level="H2"/>
+								<ToolbarSpacer/>
+								<SearchField id="searchField" width="20%" placeholder="search for..." liveChange="onSearch" class="sapUiSmallMargin"/>
+								<Button icon="sap-icon://excel-attachment" type="Accept" text="Excel" press="Exportsummarydata"/>
+								<Button icon="sap-icon://pdf-attachment" type="Reject" text="PDF" press="onHandlePressExportPdf"/>
+							</Toolbar>
+							<ScrollContainer vertical="true" horizontal="true" focusable="true">
+								<Table id="mDetails" items="{model1>/results}">
+									<columns>
+										<Column width="9em">
+											<Label design="Bold" text="{i18n>materialno}"/>
+										</Column>
+										<Column width="8em" minScreenWidth="Tablet" demandPopin="true">
+											<Label design="Bold" text="{i18n>vendor}"/>
+										</Column>
+										<Column width="5em" minScreenWidth="Tablet" demandPopin="true">
+											<Label design="Bold" text="{i18n>unit}"/>
+										</Column>
+										<Column width="5rem" minScreenWidth="Tablet" demandPopin="true">
+											<Label design="Bold" text="{i18n>quantity}"/>
+										</Column>
+										<Column width="7em" minScreenWidth="Tablet" demandPopin="true">
+											<Label design="Bold" text="{i18n>materialgp}"/>
+										</Column>
+										<Column width="8rem" minScreenWidth="Tablet" demandPopin="true">
+											<Label design="Bold" text="{i18n>storagelocation}"/>
+										</Column>
+									</columns>
+									<ColumnListItem>
+										<Text titleActive="true" titlePress="onMaterial" id="mno" title="{ZzmNo}" text="{Srtxt}"/>
+										<Text titleActive="true" titlePress="onVendor" id="vendorn" title="{VendorNumber}"/>
+										<Text id="unit2" text="{model1>id}"/>
+										<Text id="qty2" text="{model1>name}"/>
+										<Text id="metg" text="{Matkl}"/>
+										<Text id="storagel" text="{Logrt}"/>
+									</ColumnListItem>
+								</Table>
+							</ScrollContainer>
+						</Panel>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
